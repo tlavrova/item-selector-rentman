@@ -3,17 +3,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 275px;
 }
 
 .item-selector {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
-  width: 275px;
   margin: 16px;
   overflow-x: hidden;
   background-color: hsl(0, 0%, 100%);
   color: hsl(195, 3%, 24%);
+  width: 100%;
 }
 
 .folder-list {
@@ -22,10 +22,6 @@
   padding: 16px;
   width: 100%;
   box-sizing: border-box;
-}
-
-.folder-item {
-  margin-left: 16px;
 }
 
 .folder-content {
