@@ -1,9 +1,11 @@
 <div class="item-selector">
   <div class="folder-list">
     <ng-container *ngFor="let folder of folders">
-      <div class="folder-item" (click)="toggleFolder(folder)">
-        <div class="folder-content">
-          <span class="folder-toggle">▼</span>
+      <div class="folder-item">
+        <div class="folder-content" (click)="toggleFolder(folder)">
+          <span class="folder-toggle" 
+                (click)="toggleFolderExpansion(folder, $event)"
+                [class.expanded]="isFolderExpanded(folder)">▼</span>
           <input type="checkbox" 
                  [checked]="folder.selected"
                  [indeterminate]="folder.indeterminate"
@@ -11,11 +13,24 @@
                  (change)="toggleFolder(folder)">
           <span class="folder-title">{{ folder.title }}</span>
         </div>
-        <div class="folder-children" *ngIf="folder.children">
+        <div class="folder-children" *ngIf="isFolderExpanded(folder)">
+          <!-- Items directly in this folder -->
+          <div class="item-list" *ngIf="folder.items">
+            <div class="item-row" *ngFor="let item of folder.items" (click)="toggleItem(item)">
+              <input type="checkbox" 
+                     [checked]="item.selected"
+                     (click)="$event.stopPropagation()"
+                     (change)="toggleItem(item)">
+              <span class="item-title">{{ item.title }}</span>
+            </div>
+          </div>
+          <!-- Child folders -->
           <ng-container *ngFor="let child of folder.children">
-            <div class="folder-item" (click)="toggleFolder(child)">
-              <div class="folder-content">
-                <span class="folder-toggle">▼</span>
+            <div class="folder-item">
+              <div class="folder-content" (click)="toggleFolder(child)">
+                <span class="folder-toggle" 
+                      (click)="toggleFolderExpansion(child, $event)"
+                      [class.expanded]="isFolderExpanded(child)">▼</span>
                 <input type="checkbox" 
                        [checked]="child.selected"
                        [indeterminate]="child.indeterminate"
@@ -23,11 +38,24 @@
                        (change)="toggleFolder(child)">
                 <span class="folder-title">{{ child.title }}</span>
               </div>
-              <div class="folder-children" *ngIf="child.children">
+              <div class="folder-children" *ngIf="isFolderExpanded(child)">
+                <!-- Items directly in this child folder -->
+                <div class="item-list" *ngIf="child.items">
+                  <div class="item-row" *ngFor="let item of child.items" (click)="toggleItem(item)">
+                    <input type="checkbox" 
+                           [checked]="item.selected"
+                           (click)="$event.stopPropagation()"
+                           (change)="toggleItem(item)">
+                    <span class="item-title">{{ item.title }}</span>
+                  </div>
+                </div>
+                <!-- Grandchild folders -->
                 <ng-container *ngFor="let grandChild of child.children">
-                  <div class="folder-item" (click)="toggleFolder(grandChild)">
-                    <div class="folder-content">
-                      <span class="folder-toggle">▼</span>
+                  <div class="folder-item">
+                    <div class="folder-content" (click)="toggleFolder(grandChild)">
+                      <span class="folder-toggle" 
+                            (click)="toggleFolderExpansion(grandChild, $event)"
+                            [class.expanded]="isFolderExpanded(grandChild)">▼</span>
                       <input type="checkbox" 
                              [checked]="grandChild.selected"
                              [indeterminate]="grandChild.indeterminate"
@@ -35,38 +63,23 @@
                              (change)="toggleFolder(grandChild)">
                       <span class="folder-title">{{ grandChild.title }}</span>
                     </div>
-                    <div class="item-list" *ngIf="grandChild.items">
-                      <div class="item-row" *ngFor="let item of grandChild.items" (click)="toggleItem(item)">
-                        <input type="checkbox" 
-                               [checked]="item.selected"
-                               (click)="$event.stopPropagation()"
-                               (change)="toggleItem(item)">
-                        <span class="item-title">{{ item.title }}</span>
+                    <div class="folder-children" *ngIf="isFolderExpanded(grandChild)">
+                      <!-- Items in grandchild folder -->
+                      <div class="item-list" *ngIf="grandChild.items">
+                        <div class="item-row" *ngFor="let item of grandChild.items" (click)="toggleItem(item)">
+                          <input type="checkbox" 
+                                 [checked]="item.selected"
+                                 (click)="$event.stopPropagation()"
+                                 (change)="toggleItem(item)">
+                          <span class="item-title">{{ item.title }}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </ng-container>
               </div>
-              <div class="item-list" *ngIf="child.items">
-                <div class="item-row" *ngFor="let item of child.items" (click)="toggleItem(item)">
-                  <input type="checkbox" 
-                         [checked]="item.selected"
-                         (click)="$event.stopPropagation()"
-                         (change)="toggleItem(item)">
-                  <span class="item-title">{{ item.title }}</span>
-                </div>
-              </div>
             </div>
           </ng-container>
-        </div>
-        <div class="item-list" *ngIf="folder.items">
-          <div class="item-row" *ngFor="let item of folder.items" (click)="toggleItem(item)">
-            <input type="checkbox" 
-                   [checked]="item.selected"
-                   (click)="$event.stopPropagation()"
-                   (change)="toggleItem(item)">
-            <span class="item-title">{{ item.title }}</span>
-          </div>
         </div>
       </div>
     </ng-container>

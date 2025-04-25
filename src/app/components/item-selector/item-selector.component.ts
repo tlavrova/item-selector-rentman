@@ -13,6 +13,7 @@ export class ItemSelectorComponent implements OnInit {
   folders: Folder[] = [];
   items: Item[] = [];
   selectedItemIds: number[] = [];
+    expandedFolders: Set<number> = new Set();
 
   constructor(private itemService: ItemService) {}
 
@@ -21,7 +22,32 @@ export class ItemSelectorComponent implements OnInit {
       this.folders = folders;
       this.items = items;
       this.initializeItemsInFolders();
+      // Initially expand all folders
+      this.expandAllFolders();
     });
+  }
+
+  private expandAllFolders() {
+    const expandFolder = (folder: Folder) => {
+      this.expandedFolders.add(folder.id);
+      if (folder.children) {
+        folder.children.forEach(child => expandFolder(child));
+      }
+    };
+    this.folders.forEach(folder => expandFolder(folder));
+  }
+
+  toggleFolderExpansion(folder: Folder, event: MouseEvent) {
+    event.stopPropagation();
+    if (this.expandedFolders.has(folder.id)) {
+      this.expandedFolders.delete(folder.id);
+    } else {
+      this.expandedFolders.add(folder.id);
+    }
+  }
+
+  isFolderExpanded(folder: Folder): boolean {
+    return this.expandedFolders.has(folder.id);
   }
 
   private initializeItemsInFolders() {
@@ -41,11 +67,11 @@ export class ItemSelectorComponent implements OnInit {
   toggleFolder(folder: Folder) {
     const allItems = this.getAllItemsInFolder(folder);
     const allSelected = allItems.every(item => item.selected);
-    
+
     allItems.forEach(item => {
       item.selected = !allSelected;
     });
-    
+
     this.updateSelectedItemIds();
     this.updateParentFolderStates();
   }
@@ -76,7 +102,7 @@ export class ItemSelectorComponent implements OnInit {
     const updateFolderState = (folder: Folder) => {
       const allItems = this.getAllItemsInFolder(folder);
       const selectedCount = allItems.filter(item => item.selected).length;
-      
+
       if (selectedCount === 0) {
         folder.selected = false;
         folder.indeterminate = false;
@@ -101,4 +127,4 @@ export class ItemSelectorComponent implements OnInit {
     this.selectedItemIds = [];
     this.updateParentFolderStates();
   }
-} 
+}

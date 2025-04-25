@@ -29,6 +29,15 @@
   margin-right: 5px;
   font-size: 12px;
   color: #666;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+}
+
+.folder-toggle.expanded {
+  transform: rotate(180deg);
 }
 
 .folder-title {
