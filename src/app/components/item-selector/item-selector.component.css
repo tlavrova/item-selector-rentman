@@ -10,37 +10,39 @@
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
   width: 275px;
-  margin: 20px;
+  margin: 16px;
   overflow-x: hidden;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(195, 3%, 24%);
 }
 
 .folder-list {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
+  border: 1px solid hsl(210, 0%, 89%);
+  border-radius: 3px;
+  padding: 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .folder-item {
-  margin-left: 20px;
+  margin-left: 16px;
 }
 
 .folder-content {
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
   position: relative;
 }
 
 .folder-content:hover {
-  background-color: #F5F5F5;
+  background-color: hsl(0, 0%, 96%);
 }
 
 .folder-toggle {
   position: absolute;
-  right: 10px;
+  right: 16px;
   width: 20px;
   height: 20px;
   display: flex;
@@ -65,9 +67,10 @@
 }
 
 .folder-title {
-  margin-left: 5px;
+  margin-left: 8px;
   flex: 1;
   font-family: 'Source Sans Pro', Arial, sans-serif;
+  color: hsl(195, 3%, 24%);
 }
 
 .folder-title.selected {
@@ -75,23 +78,24 @@
 }
 
 .item-list {
-  margin-left: 20px;
+  margin-left: 16px;
 }
 
 .item-row {
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
 }
 
 .item-row:hover {
-  background-color: #F5F5F5;
+  background-color: hsl(0, 0%, 96%);
 }
 
 .item-title {
-  margin-left: 5px;
+  margin-left: 8px;
   font-family: 'Source Sans Pro', Arial, sans-serif;
+  color: hsl(195, 3%, 24%);
 }
 
 .item-title.selected {
@@ -99,8 +103,8 @@
 }
 
 .selection-info {
-  margin-top: 10px;
-  padding: 0 0 0 10px;
+  margin-top: 16px;
+  padding: 0 0 0 16px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -110,15 +114,16 @@
 .selection-info .ids-container {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+  gap: 8px;
 }
 
 .selection-info h3 {
   margin: 0;
   font-size: 14px;
-  color: #666;
+  color: hsl(195, 3%, 24%);
   white-space: nowrap;
   font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-weight: normal;
 }
 
 .selection-info ul {
@@ -127,26 +132,28 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px;
 }
 
 .selection-info li {
   display: inline;
   font-family: 'Source Sans Pro', Arial, sans-serif;
+  color: hsl(195, 3%, 24%);
+  font-size: 14px;
 }
 
 .selection-info button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  background-color: #f44336;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: hsl(213, 97%, 53%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
   align-self: flex-end;
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 
 .selection-info button:hover {
-  background-color: #d32f2f;
+  background-color: hsl(213, 97%, 43%);
 }
