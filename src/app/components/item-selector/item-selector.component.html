@@ -8,7 +8,9 @@
                  [indeterminate]="folder.indeterminate"
                  (click)="$event.stopPropagation()"
                  (change)="toggleFolder(folder)">
-          <span class="folder-title" (click)="toggleFolder(folder)">{{ folder.title }}</span>
+          <span class="folder-title"
+                (click)="toggleFolder(folder)"
+                [class.selected]="folder.selected || folder.indeterminate">{{ folder.title }}</span>
           <span class="folder-toggle"
                 (click)="toggleFolderExpansion(folder, $event)"
                 [class.expanded]="isFolderExpanded(folder)"></span>
@@ -21,7 +23,7 @@
                      [checked]="item.selected"
                      (click)="$event.stopPropagation()"
                      (change)="toggleItem(item)">
-              <span class="item-title">{{ item.title }}</span>
+              <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
             </div>
           </div>
           <!-- Child folders -->
@@ -33,7 +35,9 @@
                        [indeterminate]="child.indeterminate"
                        (click)="$event.stopPropagation()"
                        (change)="toggleFolder(child)">
-                <span class="folder-title" (click)="toggleFolder(child)">{{ child.title }}</span>
+                <span class="folder-title"
+                      (click)="toggleFolder(child)"
+                      [class.selected]="child.selected || child.indeterminate">{{ child.title }}</span>
                 <span class="folder-toggle"
                       (click)="toggleFolderExpansion(child, $event)"
                       [class.expanded]="isFolderExpanded(child)"></span>
@@ -46,7 +50,7 @@
                            [checked]="item.selected"
                            (click)="$event.stopPropagation()"
                            (change)="toggleItem(item)">
-                    <span class="item-title">{{ item.title }}</span>
+                    <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
                   </div>
                 </div>
                 <!-- Grandchild folders -->
@@ -58,7 +62,9 @@
                              [indeterminate]="grandChild.indeterminate"
                              (click)="$event.stopPropagation()"
                              (change)="toggleFolder(grandChild)">
-                      <span class="folder-title" (click)="toggleFolder(grandChild)">{{ grandChild.title }}</span>
+                      <span class="folder-title"
+                            (click)="toggleFolder(grandChild)"
+                            [class.selected]="grandChild.selected || grandChild.indeterminate">{{ grandChild.title }}</span>
                       <span class="folder-toggle"
                             (click)="toggleFolderExpansion(grandChild, $event)"
                             [class.expanded]="isFolderExpanded(grandChild)"></span>
@@ -71,7 +77,7 @@
                                  [checked]="item.selected"
                                  (click)="$event.stopPropagation()"
                                  (change)="toggleItem(item)">
-                          <span class="item-title">{{ item.title }}</span>
+                          <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
                         </div>
                       </div>
                     </div>
