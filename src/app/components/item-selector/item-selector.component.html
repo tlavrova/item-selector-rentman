@@ -3,15 +3,15 @@
     <ng-container *ngFor="let folder of folders">
       <div class="folder-item">
         <div class="folder-content" (click)="toggleFolder(folder)">
-          <span class="folder-toggle" 
-                (click)="toggleFolderExpansion(folder, $event)"
-                [class.expanded]="isFolderExpanded(folder)">▼</span>
           <input type="checkbox" 
                  [checked]="folder.selected"
                  [indeterminate]="folder.indeterminate"
                  (click)="$event.stopPropagation()"
                  (change)="toggleFolder(folder)">
           <span class="folder-title">{{ folder.title }}</span>
+          <span class="folder-toggle" 
+                (click)="toggleFolderExpansion(folder, $event)"
+                [class.expanded]="isFolderExpanded(folder)"></span>
         </div>
         <div class="folder-children" *ngIf="isFolderExpanded(folder)">
           <!-- Items directly in this folder -->
@@ -28,15 +28,15 @@
           <ng-container *ngFor="let child of folder.children">
             <div class="folder-item">
               <div class="folder-content" (click)="toggleFolder(child)">
-                <span class="folder-toggle" 
-                      (click)="toggleFolderExpansion(child, $event)"
-                      [class.expanded]="isFolderExpanded(child)">▼</span>
                 <input type="checkbox" 
                        [checked]="child.selected"
                        [indeterminate]="child.indeterminate"
                        (click)="$event.stopPropagation()"
                        (change)="toggleFolder(child)">
                 <span class="folder-title">{{ child.title }}</span>
+                <span class="folder-toggle" 
+                      (click)="toggleFolderExpansion(child, $event)"
+                      [class.expanded]="isFolderExpanded(child)"></span>
               </div>
               <div class="folder-children" *ngIf="isFolderExpanded(child)">
                 <!-- Items directly in this child folder -->
@@ -53,15 +53,15 @@
                 <ng-container *ngFor="let grandChild of child.children">
                   <div class="folder-item">
                     <div class="folder-content" (click)="toggleFolder(grandChild)">
-                      <span class="folder-toggle" 
-                            (click)="toggleFolderExpansion(grandChild, $event)"
-                            [class.expanded]="isFolderExpanded(grandChild)">▼</span>
                       <input type="checkbox" 
                              [checked]="grandChild.selected"
                              [indeterminate]="grandChild.indeterminate"
                              (click)="$event.stopPropagation()"
                              (change)="toggleFolder(grandChild)">
                       <span class="folder-title">{{ grandChild.title }}</span>
+                      <span class="folder-toggle" 
+                            (click)="toggleFolderExpansion(grandChild, $event)"
+                            [class.expanded]="isFolderExpanded(grandChild)"></span>
                     </div>
                     <div class="folder-children" *ngIf="isFolderExpanded(grandChild)">
                       <!-- Items in grandchild folder -->
