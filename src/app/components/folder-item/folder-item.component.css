@@ -1,0 +1,36 @@
+.folder-item {
+  margin-left: 16px;
+}
+
+.folder-content {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  position: relative;
+}
+
+.folder-title {
+  flex: 1;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.folder-title.selected {
+  font-weight: bold;
+}
+
+.folder-toggle {
+  position: absolute;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.folder-toggle.expanded {
+  transform: rotate(225deg);
+} 

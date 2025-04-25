@@ -2,75 +2,13 @@
   <div class="item-selector">
     <div class="folder-list">
       <ng-container *ngFor="let folder of folders">
-        <div class="folder-item">
-          <div class="folder-content">
-            <input type="checkbox" 
-                   [checked]="folder.selected"
-                   [indeterminate]="folder.indeterminate"
-                   (click)="$event.stopPropagation()"
-                   (change)="toggleFolder(folder)">
-            <span class="folder-title" 
-                  (click)="toggleFolder(folder)"
-                  [class.selected]="folder.selected || folder.indeterminate">{{ folder.title }}</span>
-            <span class="folder-toggle" 
-                  (click)="toggleFolderExpansion(folder, $event)"
-                  [class.expanded]="isFolderExpanded(folder)"></span>
-          </div>
-          <div class="folder-children" *ngIf="isFolderExpanded(folder)">
-            <!-- Child folders first -->
-            <ng-container *ngFor="let child of folder.children">
-              <div class="folder-item">
-                <div class="folder-content">
-                  <input type="checkbox" 
-                         [checked]="child.selected"
-                         [indeterminate]="child.indeterminate"
-                         (click)="$event.stopPropagation()"
-                         (change)="toggleFolder(child)">
-                  <span class="folder-title" 
-                        (click)="toggleFolder(child)"
-                        [class.selected]="child.selected || child.indeterminate">{{ child.title }}</span>
-                  <span class="folder-toggle" 
-                        (click)="toggleFolderExpansion(child, $event)"
-                        [class.expanded]="isFolderExpanded(child)"></span>
-                </div>
-                <div class="folder-children" *ngIf="isFolderExpanded(child)">
-                  <!-- Grandchild folders first -->
-                  <ng-container *ngFor="let grandChild of child.children">
-                    <div class="folder-item">
-                      <div class="folder-content">
-                        <input type="checkbox" 
-                               [checked]="grandChild.selected"
-                               [indeterminate]="grandChild.indeterminate"
-                               (click)="$event.stopPropagation()"
-                               (change)="toggleFolder(grandChild)">
-                        <span class="folder-title" 
-                              (click)="toggleFolder(grandChild)"
-                              [class.selected]="grandChild.selected || grandChild.indeterminate">{{ grandChild.title }}</span>
-                        <span class="folder-toggle" 
-                              (click)="toggleFolderExpansion(grandChild, $event)"
-                              [class.expanded]="isFolderExpanded(grandChild)"></span>
-                      </div>
-                      <div class="folder-children" *ngIf="isFolderExpanded(grandChild)">
-                        <!-- Items in grandchild folder -->
-                        <app-item-list *ngIf="grandChild.items"
-                                      [items]="grandChild.items"
-                                      (itemToggled)="onItemToggled($event)"></app-item-list>
-                      </div>
-                    </div>
-                  </ng-container>
-                  <!-- Items in child folder -->
-                  <app-item-list *ngIf="child.items"
-                                [items]="child.items"
-                                (itemToggled)="onItemToggled($event)"></app-item-list>
-                </div>
-              </div>
-            </ng-container>
-            <!-- Items in parent folder -->
-            <app-item-list *ngIf="folder.items"
-                          [items]="folder.items"
-                          (itemToggled)="onItemToggled($event)"></app-item-list>
-          </div>
-        </div>
+        <app-folder-item
+          [folder]="folder"
+          [expandedFolders]="expandedFolders"
+          (folderToggled)="toggleFolder($event)"
+          (folderExpansionToggled)="toggleFolderExpansion($event.folder, $event.event)"
+          (itemToggled)="onItemToggled($event)">
+        </app-folder-item>
       </ng-container>
     </div>
   </div>

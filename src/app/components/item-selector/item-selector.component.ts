@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Folder, Item, ItemService} from '../../services/item.service';
 import {SelectionInfoComponent} from '../selection-info/selection-info.component';
-import {ItemListComponent} from '../item-list/item-list.component';
+import {FolderItemComponent} from '../folder-item/folder-item.component';
 
 @Component({
   selector: 'app-item-selector',
   templateUrl: './item-selector.component.html',
   styleUrls: ['./item-selector.component.css'],
   standalone: true,
-  imports: [CommonModule, SelectionInfoComponent, ItemListComponent]
+  imports: [CommonModule, SelectionInfoComponent, FolderItemComponent]
 })
 export class ItemSelectorComponent implements OnInit {
   folders: Folder[] = [];
@@ -22,26 +22,12 @@ export class ItemSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.itemService.getItems().subscribe(({folders, items}) => {
-      this.folders = this.sortFolders(folders);
+      this.folders = folders;
       this.items = items;
       this.initializeItemsInFolders();
       // Initially expand all folders
       this.expandAllFolders();
     });
-  }
-
-  private sortFolders(folders: Folder[]): Folder[] {
-    return folders
-      .map(folder => ({
-        ...folder,
-        children: folder.children ? this.sortFolders(folder.children) : [],
-        items: folder.items ? this.sortItems(folder.items) : []
-      }))
-      .sort((a, b) => a.title.localeCompare(b.title));
-  }
-
-  private sortItems(items: Item[]): Item[] {
-    return [...items].sort((a, b) => a.title.localeCompare(b.title));
   }
 
   toggleFolderExpansion(folder: Folder, event: MouseEvent) {

@@ -1,0 +1,31 @@
+<div class="folder-item">
+  <div class="folder-content">
+    <input type="checkbox" 
+           [checked]="folder.selected"
+           [indeterminate]="folder.indeterminate"
+           (click)="$event.stopPropagation()"
+           (change)="folderToggled.emit(folder)">
+    <span class="folder-title" 
+          (click)="folderToggled.emit(folder)"
+          [class.selected]="folder.selected || folder.indeterminate">{{ folder.title }}</span>
+    <span class="folder-toggle" 
+          (click)="folderExpansionToggled.emit({folder: folder, event: $event})"
+          [class.expanded]="isFolderExpanded(folder)"></span>
+  </div>
+  <div class="folder-children" *ngIf="isFolderExpanded(folder)">
+    <!-- Child folders -->
+    <ng-container *ngFor="let child of folder.children">
+      <app-folder-item
+        [folder]="child"
+        [expandedFolders]="expandedFolders"
+        (folderToggled)="folderToggled.emit($event)"
+        (folderExpansionToggled)="folderExpansionToggled.emit($event)"
+        (itemToggled)="itemToggled.emit($event)">
+      </app-folder-item>
+    </ng-container>
+    <!-- Items in this folder -->
+    <app-item-list *ngIf="folder.items"
+                  [items]="folder.items"
+                  (itemToggled)="itemToggled.emit($event)"></app-item-list>
+  </div>
+</div> 
