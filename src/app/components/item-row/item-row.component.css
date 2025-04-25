@@ -1,0 +1,21 @@
+.item-row {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.item-row:hover {
+  background-color: hsl(0, 0%, 96%);
+}
+
+.item-title {
+  margin-left: 8px;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  color: hsl(195, 3%, 24%);
+  font-size: 14px;
+}
+
+.item-title.selected {
+  font-weight: 600;
+} 

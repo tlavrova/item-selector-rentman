@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemService, Folder, Item } from '../../services/item.service';
 import { SelectionInfoComponent } from '../selection-info/selection-info.component';
+import { ItemRowComponent } from '../item-row/item-row.component';
 
 @Component({
   selector: 'app-item-selector',
   templateUrl: './item-selector.component.html',
   styleUrls: ['./item-selector.component.css'],
   standalone: true,
-  imports: [CommonModule, SelectionInfoComponent]
+  imports: [CommonModule, SelectionInfoComponent, ItemRowComponent]
 })
 export class ItemSelectorComponent implements OnInit {
   folders: Folder[] = [];
@@ -127,5 +128,9 @@ export class ItemSelectorComponent implements OnInit {
     this.items.forEach(item => item.selected = false);
     this.selectedItemIds = [];
     this.updateParentFolderStates();
+  }
+
+  onItemToggled(item: Item) {
+    this.toggleItem(item);
   }
 }

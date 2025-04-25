@@ -1,0 +1,7 @@
+<div class="item-row" (click)="onItemClick($event)">
+  <input type="checkbox" 
+         [checked]="item.selected"
+         (click)="onCheckboxClick($event)"
+         (change)="onCheckboxChange()">
+  <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
+</div> 

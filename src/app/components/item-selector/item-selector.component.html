@@ -19,13 +19,9 @@
           <div class="folder-children" *ngIf="isFolderExpanded(folder)">
             <!-- Items directly in this folder -->
             <div class="item-list" *ngIf="folder.items">
-              <div class="item-row" *ngFor="let item of folder.items" (click)="toggleItem(item)">
-                <input type="checkbox" 
-                       [checked]="item.selected"
-                       (click)="$event.stopPropagation()"
-                       (change)="toggleItem(item)">
-                <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
-              </div>
+              <app-item-row *ngFor="let item of folder.items" 
+                           [item]="item"
+                           (itemToggled)="onItemToggled($event)"></app-item-row>
             </div>
             <!-- Child folders -->
             <ng-container *ngFor="let child of folder.children">
@@ -46,13 +42,9 @@
                 <div class="folder-children" *ngIf="isFolderExpanded(child)">
                   <!-- Items directly in this child folder -->
                   <div class="item-list" *ngIf="child.items">
-                    <div class="item-row" *ngFor="let item of child.items" (click)="toggleItem(item)">
-                      <input type="checkbox" 
-                             [checked]="item.selected"
-                             (click)="$event.stopPropagation()"
-                             (change)="toggleItem(item)">
-                      <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
-                    </div>
+                    <app-item-row *ngFor="let item of child.items" 
+                                 [item]="item"
+                                 (itemToggled)="onItemToggled($event)"></app-item-row>
                   </div>
                   <!-- Grandchild folders -->
                   <ng-container *ngFor="let grandChild of child.children">
@@ -73,13 +65,9 @@
                       <div class="folder-children" *ngIf="isFolderExpanded(grandChild)">
                         <!-- Items in grandchild folder -->
                         <div class="item-list" *ngIf="grandChild.items">
-                          <div class="item-row" *ngFor="let item of grandChild.items" (click)="toggleItem(item)">
-                            <input type="checkbox" 
-                                   [checked]="item.selected"
-                                   (click)="$event.stopPropagation()"
-                                   (change)="toggleItem(item)">
-                            <span class="item-title" [class.selected]="item.selected">{{ item.title }}</span>
-                          </div>
+                          <app-item-row *ngFor="let item of grandChild.items" 
+                                       [item]="item"
+                                       (itemToggled)="onItemToggled($event)"></app-item-row>
                         </div>
                       </div>
                     </div>
