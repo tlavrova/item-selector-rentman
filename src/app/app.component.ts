@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ItemSelectorComponent } from './components/item-selector/item-selector.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [CommonModule, ItemSelectorComponent],
+  template: '<app-item-selector></app-item-selector>'
 })
 export class AppComponent {
   title = 'item-selector-rentman';
