@@ -2,13 +2,13 @@
   <div class="folder-list">
     <ng-container *ngFor="let folder of folders">
       <div class="folder-item">
-        <div class="folder-content" (click)="toggleFolder(folder)">
+        <div class="folder-content">
           <input type="checkbox" 
                  [checked]="folder.selected"
                  [indeterminate]="folder.indeterminate"
                  (click)="$event.stopPropagation()"
                  (change)="toggleFolder(folder)">
-          <span class="folder-title">{{ folder.title }}</span>
+          <span class="folder-title" (click)="toggleFolder(folder)">{{ folder.title }}</span>
           <span class="folder-toggle" 
                 (click)="toggleFolderExpansion(folder, $event)"
                 [class.expanded]="isFolderExpanded(folder)"></span>
@@ -27,13 +27,13 @@
           <!-- Child folders -->
           <ng-container *ngFor="let child of folder.children">
             <div class="folder-item">
-              <div class="folder-content" (click)="toggleFolder(child)">
+              <div class="folder-content">
                 <input type="checkbox" 
                        [checked]="child.selected"
                        [indeterminate]="child.indeterminate"
                        (click)="$event.stopPropagation()"
                        (change)="toggleFolder(child)">
-                <span class="folder-title">{{ child.title }}</span>
+                <span class="folder-title" (click)="toggleFolder(child)">{{ child.title }}</span>
                 <span class="folder-toggle" 
                       (click)="toggleFolderExpansion(child, $event)"
                       [class.expanded]="isFolderExpanded(child)"></span>
@@ -52,13 +52,13 @@
                 <!-- Grandchild folders -->
                 <ng-container *ngFor="let grandChild of child.children">
                   <div class="folder-item">
-                    <div class="folder-content" (click)="toggleFolder(grandChild)">
+                    <div class="folder-content">
                       <input type="checkbox" 
                              [checked]="grandChild.selected"
                              [indeterminate]="grandChild.indeterminate"
                              (click)="$event.stopPropagation()"
                              (change)="toggleFolder(grandChild)">
-                      <span class="folder-title">{{ grandChild.title }}</span>
+                      <span class="folder-title" (click)="toggleFolder(grandChild)">{{ grandChild.title }}</span>
                       <span class="folder-toggle" 
                             (click)="toggleFolderExpansion(grandChild, $event)"
                             [class.expanded]="isFolderExpanded(grandChild)"></span>
