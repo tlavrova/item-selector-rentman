@@ -1,0 +1,9 @@
+<div class="selection-info">
+  <div class="ids-container">
+    <h3>Selected Item IDs:</h3>
+    <ul>
+      <li *ngFor="let id of selectedItemIds; let last = last">{{ id }}{{ !last ? ', ' : '' }}</li>
+    </ul>
+  </div>
+  <button (click)="onClearSelection()">Clear Selection</button>
+</div> 

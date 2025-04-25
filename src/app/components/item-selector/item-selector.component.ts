@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemService, Folder, Item } from '../../services/item.service';
+import { SelectionInfoComponent } from '../selection-info/selection-info.component';
 
 @Component({
   selector: 'app-item-selector',
   templateUrl: './item-selector.component.html',
   styleUrls: ['./item-selector.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, SelectionInfoComponent]
 })
 export class ItemSelectorComponent implements OnInit {
   folders: Folder[] = [];
