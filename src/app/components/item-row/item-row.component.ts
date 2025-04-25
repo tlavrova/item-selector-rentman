@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Item } from '../../services/item.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Item} from '../../services/item.service';
 
 @Component({
   selector: 'app-item-row',
@@ -8,7 +8,7 @@ import { Item } from '../../services/item.service';
   styleUrls: ['./item-row.component.css']
 })
 export class ItemRowComponent {
-  @Input() item!: Item;
+  @Input({required: true}) item!: Item;
   @Output() itemToggled = new EventEmitter<Item>();
 
   onItemClick(event: MouseEvent) {
@@ -23,4 +23,4 @@ export class ItemRowComponent {
   onCheckboxChange() {
     this.itemToggled.emit(this.item);
   }
-} 
+}

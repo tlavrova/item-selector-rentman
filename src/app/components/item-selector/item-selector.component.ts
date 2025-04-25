@@ -1,42 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ItemService, Folder, Item } from '../../services/item.service';
-import { SelectionInfoComponent } from '../selection-info/selection-info.component';
-import { ItemRowComponent } from '../item-row/item-row.component';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Folder, Item, ItemService} from '../../services/item.service';
+import {SelectionInfoComponent} from '../selection-info/selection-info.component';
+import {ItemListComponent} from '../item-list/item-list.component';
 
 @Component({
   selector: 'app-item-selector',
   templateUrl: './item-selector.component.html',
   styleUrls: ['./item-selector.component.css'],
   standalone: true,
-  imports: [CommonModule, SelectionInfoComponent, ItemRowComponent]
+  imports: [CommonModule, SelectionInfoComponent, ItemListComponent]
 })
 export class ItemSelectorComponent implements OnInit {
   folders: Folder[] = [];
   items: Item[] = [];
   selectedItemIds: number[] = [];
-    expandedFolders: Set<number> = new Set();
+  expandedFolders: Set<number> = new Set();
 
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService) {
+  }
 
   ngOnInit() {
-    this.itemService.getItems().subscribe(({ folders, items }) => {
+    this.itemService.getItems().subscribe(({folders, items}) => {
       this.folders = folders;
       this.items = items;
       this.initializeItemsInFolders();
       // Initially expand all folders
       this.expandAllFolders();
     });
-  }
-
-  private expandAllFolders() {
-    const expandFolder = (folder: Folder) => {
-      this.expandedFolders.add(folder.id);
-      if (folder.children) {
-        folder.children.forEach(child => expandFolder(child));
-      }
-    };
-    this.folders.forEach(folder => expandFolder(folder));
   }
 
   toggleFolderExpansion(folder: Folder, event: MouseEvent) {
@@ -50,20 +41,6 @@ export class ItemSelectorComponent implements OnInit {
 
   isFolderExpanded(folder: Folder): boolean {
     return this.expandedFolders.has(folder.id);
-  }
-
-  private initializeItemsInFolders() {
-    const folderMap = new Map<number, Folder>();
-    const processFolders = (folders: Folder[]) => {
-      folders.forEach(folder => {
-        folderMap.set(folder.id, folder);
-        folder.items = this.items.filter(item => item.folder_id === folder.id);
-        if (folder.children) {
-          processFolders(folder.children);
-        }
-      });
-    };
-    processFolders(this.folders);
   }
 
   toggleFolder(folder: Folder) {
@@ -82,6 +59,40 @@ export class ItemSelectorComponent implements OnInit {
     item.selected = !item.selected;
     this.updateSelectedItemIds();
     this.updateParentFolderStates();
+  }
+
+  clearSelection() {
+    this.items.forEach(item => item.selected = false);
+    this.selectedItemIds = [];
+    this.updateParentFolderStates();
+  }
+
+  onItemToggled(item: Item) {
+    this.toggleItem(item);
+  }
+
+  private expandAllFolders() {
+    const expandFolder = (folder: Folder) => {
+      this.expandedFolders.add(folder.id);
+      if (folder.children) {
+        folder.children.forEach(child => expandFolder(child));
+      }
+    };
+    this.folders.forEach(folder => expandFolder(folder));
+  }
+
+  private initializeItemsInFolders() {
+    const folderMap = new Map<number, Folder>();
+    const processFolders = (folders: Folder[]) => {
+      folders.forEach(folder => {
+        folderMap.set(folder.id, folder);
+        folder.items = this.items.filter(item => item.folder_id === folder.id);
+        if (folder.children) {
+          processFolders(folder.children);
+        }
+      });
+    };
+    processFolders(this.folders);
   }
 
   private getAllItemsInFolder(folder: Folder): Item[] {
@@ -122,15 +133,5 @@ export class ItemSelectorComponent implements OnInit {
     };
 
     this.folders.forEach(folder => updateFolderState(folder));
-  }
-
-  clearSelection() {
-    this.items.forEach(item => item.selected = false);
-    this.selectedItemIds = [];
-    this.updateParentFolderStates();
-  }
-
-  onItemToggled(item: Item) {
-    this.toggleItem(item);
   }
 }

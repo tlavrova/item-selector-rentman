@@ -1,0 +1,5 @@
+<div class="item-list">
+  <app-item-row *ngFor="let item of items" 
+                [item]="item"
+                (itemToggled)="onItemToggled($event)"></app-item-row>
+</div> 

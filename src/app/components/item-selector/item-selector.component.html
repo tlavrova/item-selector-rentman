@@ -18,11 +18,9 @@
           </div>
           <div class="folder-children" *ngIf="isFolderExpanded(folder)">
             <!-- Items directly in this folder -->
-            <div class="item-list" *ngIf="folder.items">
-              <app-item-row *ngFor="let item of folder.items" 
-                           [item]="item"
-                           (itemToggled)="onItemToggled($event)"></app-item-row>
-            </div>
+            <app-item-list *ngIf="folder.items"
+                          [items]="folder.items"
+                          (itemToggled)="onItemToggled($event)"></app-item-list>
             <!-- Child folders -->
             <ng-container *ngFor="let child of folder.children">
               <div class="folder-item">
@@ -41,11 +39,9 @@
                 </div>
                 <div class="folder-children" *ngIf="isFolderExpanded(child)">
                   <!-- Items directly in this child folder -->
-                  <div class="item-list" *ngIf="child.items">
-                    <app-item-row *ngFor="let item of child.items" 
-                                 [item]="item"
-                                 (itemToggled)="onItemToggled($event)"></app-item-row>
-                  </div>
+                  <app-item-list *ngIf="child.items"
+                                [items]="child.items"
+                                (itemToggled)="onItemToggled($event)"></app-item-list>
                   <!-- Grandchild folders -->
                   <ng-container *ngFor="let grandChild of child.children">
                     <div class="folder-item">
@@ -64,11 +60,9 @@
                       </div>
                       <div class="folder-children" *ngIf="isFolderExpanded(grandChild)">
                         <!-- Items in grandchild folder -->
-                        <div class="item-list" *ngIf="grandChild.items">
-                          <app-item-row *ngFor="let item of grandChild.items" 
-                                       [item]="item"
-                                       (itemToggled)="onItemToggled($event)"></app-item-row>
-                        </div>
+                        <app-item-list *ngIf="grandChild.items"
+                                      [items]="grandChild.items"
+                                      (itemToggled)="onItemToggled($event)"></app-item-list>
                       </div>
                     </div>
                   </ng-container>
