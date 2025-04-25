@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ItemSelectorComponent } from './components/item-selector/item-selector.component';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ItemSelectorComponent} from './components/item-selector/item-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -11,3 +11,6 @@ import { ItemSelectorComponent } from './components/item-selector/item-selector.
 export class AppComponent {
   title = 'item-selector-rentman';
 }
+
+//TODO sorting doesn't work
+//TODO when click on the row selecting logic should only work for folder

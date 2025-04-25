@@ -17,11 +17,7 @@
                   [class.expanded]="isFolderExpanded(folder)"></span>
           </div>
           <div class="folder-children" *ngIf="isFolderExpanded(folder)">
-            <!-- Items directly in this folder -->
-            <app-item-list *ngIf="folder.items"
-                          [items]="folder.items"
-                          (itemToggled)="onItemToggled($event)"></app-item-list>
-            <!-- Child folders -->
+            <!-- Child folders first -->
             <ng-container *ngFor="let child of folder.children">
               <div class="folder-item">
                 <div class="folder-content">
@@ -38,11 +34,7 @@
                         [class.expanded]="isFolderExpanded(child)"></span>
                 </div>
                 <div class="folder-children" *ngIf="isFolderExpanded(child)">
-                  <!-- Items directly in this child folder -->
-                  <app-item-list *ngIf="child.items"
-                                [items]="child.items"
-                                (itemToggled)="onItemToggled($event)"></app-item-list>
-                  <!-- Grandchild folders -->
+                  <!-- Grandchild folders first -->
                   <ng-container *ngFor="let grandChild of child.children">
                     <div class="folder-item">
                       <div class="folder-content">
@@ -66,9 +58,17 @@
                       </div>
                     </div>
                   </ng-container>
+                  <!-- Items in child folder -->
+                  <app-item-list *ngIf="child.items"
+                                [items]="child.items"
+                                (itemToggled)="onItemToggled($event)"></app-item-list>
                 </div>
               </div>
             </ng-container>
+            <!-- Items in parent folder -->
+            <app-item-list *ngIf="folder.items"
+                          [items]="folder.items"
+                          (itemToggled)="onItemToggled($event)"></app-item-list>
           </div>
         </div>
       </ng-container>
