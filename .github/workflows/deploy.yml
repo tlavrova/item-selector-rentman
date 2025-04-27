@@ -31,4 +31,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PAGES_TOKEN }}
           publish_dir: ./dist/item-selector-rentman/browser
-          commit_message: "Deploy: ${{ github.event.head_commit.message }}" 
+          commit_message: "Deploy: ${{ github.event.head_commit.message }}"
+          force_orphan: true
+          enable_jekyll: false 
