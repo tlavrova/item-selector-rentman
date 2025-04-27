@@ -12,8 +12,7 @@
           (click)="$event.stopPropagation(); folderExpansionToggled.emit({folder: folder, event: $event})"
           [class.expanded]="isFolderExpanded(folder)"></span>
   </div>
-  <div class="folder-children" *ngIf="isFolderExpanded(folder)">
-    <!-- Child folders -->
+  <div *ngIf="isFolderExpanded(folder)" class="folder-children">
     <ng-container *ngFor="let child of folder.children">
       <app-folder-item
         [folder]="child"
@@ -23,9 +22,9 @@
         (itemToggled)="itemToggled.emit($event)">
       </app-folder-item>
     </ng-container>
-    <!-- Items in this folder -->
     <app-item-list *ngIf="folder.items"
                   [items]="folder.items"
-                  (itemToggled)="itemToggled.emit($event)"></app-item-list>
+                  (itemToggled)="itemToggled.emit($event)">
+    </app-item-list>
   </div>
-</div> 
+</div>

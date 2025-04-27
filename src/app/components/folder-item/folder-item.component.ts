@@ -11,11 +11,11 @@ import { NgIf, NgForOf } from '@angular/common';
   styleUrls: ['./folder-item.component.css']
 })
 export class FolderItemComponent {
-  @Input() folder!: Folder;
-  @Input() expandedFolders!: Set<number>;
+  @Input({ required: true }) folder!: Folder;
+  @Input({ required: true }) expandedFolders!: Set<number>;
   
   @Output() folderToggled = new EventEmitter<Folder>();
-  @Output() folderExpansionToggled = new EventEmitter<{folder: Folder, event: MouseEvent}>();
+  @Output() folderExpansionToggled = new EventEmitter<{ folder: Folder, event: MouseEvent }>();
   @Output() itemToggled = new EventEmitter<Item>();
 
   isFolderExpanded(folder: Folder): boolean {
