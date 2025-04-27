@@ -22,27 +22,6 @@
   box-sizing: border-box;
 }
 
-.item-row {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  cursor: pointer;
-}
-
-.item-row:hover {
-  background-color: hsl(0, 0%, 96%);
-}
-
-.item-title {
-  margin-left: 8px;
-  font-family: 'Source Sans Pro', Arial, sans-serif;
-  color: hsl(195, 3%, 24%);
-}
-
-.item-title.selected {
-  font-weight: 600;
-}
-
 .selection-info {
   margin-top: 16px;
   padding: 0 0 0 16px;
