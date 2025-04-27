@@ -22,6 +22,10 @@ jobs:
       - name: Build
         run: npm run deploy
 
+      - name: Create 404.html
+        run: |
+          cp dist/item-selector-rentman/browser/index.html dist/item-selector-rentman/browser/404.html
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
