@@ -22,10 +22,6 @@
   box-sizing: border-box;
 }
 
-.item-list {
-  margin-left: 16px;
-}
-
 .item-row {
   display: flex;
   align-items: center;
