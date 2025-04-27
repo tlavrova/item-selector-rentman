@@ -84,7 +84,8 @@ export class ItemSelectorComponent implements OnInit {
     const processFolders = (folders: Folder[]) => {
       folders.forEach(folder => {
         folderMap.set(folder.id, folder);
-        folder.items = this.items.filter(item => item.folder_id === folder.id);
+        folder.items = this.items.filter(item => item.folder_id === folder.id)
+          .sort((a, b) => a.title.localeCompare(b.title));
         if (folder.children) {
           processFolders(folder.children);
         }
