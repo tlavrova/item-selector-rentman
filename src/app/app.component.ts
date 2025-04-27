@@ -11,7 +11,3 @@ import {ItemSelectorComponent} from './components/item-selector/item-selector.co
 export class AppComponent {
   title = 'item-selector-rentman';
 }
-
-//TODO No hover effect
-//TODO connect keyboard optional
-//TODO github pages optional

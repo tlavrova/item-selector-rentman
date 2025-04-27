@@ -49,7 +49,6 @@ export class ItemService {
       indeterminate: false
     }));
 
-    // Build folder hierarchy
     const rootFolders: Folder[] = [];
     const folderMap = new Map<number, Folder>();
 
@@ -69,7 +68,6 @@ export class ItemService {
       }
     });
 
-    // Sort folders alphabetically
     const sortFolders = (folders: Folder[]) => {
       folders.sort((a, b) => a.title.localeCompare(b.title));
       folders.forEach(folder => {
