@@ -12,5 +12,6 @@ export class AppComponent {
   title = 'item-selector-rentman';
 }
 
-//TODO sorting doesn't work
-//TODO when click on the row selecting logic should only work for folder
+//TODO No hover effect
+//TODO connect keyboard optional
+//TODO github pages optional

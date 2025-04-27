@@ -9,7 +9,7 @@
           (click)="folderToggled.emit(folder)"
           [class.selected]="folder.selected || folder.indeterminate">{{ folder.title }}</span>
     <span class="folder-toggle" 
-          (click)="folderExpansionToggled.emit({folder: folder, event: $event})"
+          (click)="$event.stopPropagation(); folderExpansionToggled.emit({folder: folder, event: $event})"
           [class.expanded]="isFolderExpanded(folder)"></span>
   </div>
   <div class="folder-children" *ngIf="isFolderExpanded(folder)">
