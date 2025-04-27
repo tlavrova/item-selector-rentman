@@ -1,5 +1,4 @@
 .selection-info {
-  margin-top: 16px;
   padding: 0 0 0 16px;
   display: flex;
   flex-direction: column;
@@ -52,4 +51,4 @@
 
 .selection-info button:hover {
   background-color: hsl(213, 97%, 43%);
-} 
+}

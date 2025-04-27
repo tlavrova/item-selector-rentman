@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 
 export interface Folder {
   id: number;
@@ -25,14 +25,15 @@ export interface Item {
 export class ItemService {
   private apiUrl = '/response.json';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getItems(): Observable<{ folders: Folder[], items: Item[] }> {
+  getItems$(): Observable<{ folders: Folder[], items: Item[] }> {
     return this.http.get<any>(this.apiUrl).pipe(
       map(response => {
         const folders = this.processFolders(response.folders);
         const items = this.processItems(response.items);
-        return { folders, items };
+        return {folders, items};
       })
     );
   }
@@ -90,4 +91,4 @@ export class ItemService {
       selected: false
     }));
   }
-} 
+}

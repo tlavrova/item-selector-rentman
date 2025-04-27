@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Folder, Item, ItemService} from '../../services/item.service';
 import {SelectionInfoComponent} from '../selection-info/selection-info.component';
 import {FolderItemComponent} from '../folder-item/folder-item.component';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-item-selector',
@@ -17,15 +18,16 @@ export class ItemSelectorComponent implements OnInit {
   selectedItemIds: number[] = [];
   expandedFolders: Set<number> = new Set();
 
+  private destroyRef = inject(DestroyRef);
+
   constructor(private itemService: ItemService) {
   }
 
   ngOnInit() {
-    this.itemService.getItems().subscribe(({folders, items}) => {
+    this.itemService.getItems$().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(({folders, items}) => {
       this.folders = folders;
       this.items = items;
       this.initializeItemsInFolders();
-      // Initially expand all folders
       this.expandAllFolders();
     });
   }
@@ -37,10 +39,6 @@ export class ItemSelectorComponent implements OnInit {
     } else {
       this.expandedFolders.add(folder.id);
     }
-  }
-
-  isFolderExpanded(folder: Folder): boolean {
-    return this.expandedFolders.has(folder.id);
   }
 
   toggleFolder(folder: Folder) {
